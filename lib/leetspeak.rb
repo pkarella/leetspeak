@@ -1,25 +1,21 @@
 class String
   define_method(:leetspeak) do
-    sentence_array = self.split()
-    sentence_array.each() do |word|
-      if word.include?("e")
-        word.gsub!("e","3")
-      end
+    word = self.split("")
+    new_word = []
 
-      if word.include?("o")
-        word.gsub!("o","0")
+    word.each_with_index do |i, index|
+      if i == "e"
+        new_word.push("3")
+      elsif i == "o"
+        new_word.push("0")
+      elsif i == "I"
+        new_word.push("1")
+      elsif (i == "s") && index != 0 && self[index-1] != " "
+        new_word.push("z")
+      else
+        new_word.push(i)
       end
-
-      if word.include?("I")
-        word.gsub!("I","1")
-      end
-
-      if word.include?("s")
-        word.slice!(0)
-        word.gsub!("s", "z")
-      end
-      "s" + word
     end
-    sentence_array.join(" ")
+    new_word.join
   end
 end
